@@ -1,18 +1,18 @@
 "use client"
 import { useState } from "react";
+import { useRouter } from 'next/navigation'
 
 const Sidebar = () => {
     const [open, setOpen] = useState(true);
     const Menus = [
-      { title: "Overview", src: "Overview" },
-      { title: "Transactions", src: "Transactions" },
-      { title: "Loyalty Cards", src: "Card", gap: true },
-      { title: "Subscriptions ", src: "Calendar" },
-      { title: "Debts", src: "Debt" },
-      { title: "Legal information", src: "Legal" },
-      { title: "Notifications ", src: "Notifications", gap: true },
-      { title: "Setting", src: "Settings" },
+      { title: "Campaign", src: "Overview",url:'/' },
+      { title: "Apps", src: "Card", url: '/apps' },
+      { title: "Phone number", src: "Calendar", url: '/phonenumber' },
+
+      { title: "Setting", src: "Settings", gap: true },
     ];
+    const router = useRouter()
+
   return (
         <div className="flex">
       <div
@@ -38,7 +38,7 @@ const Sidebar = () => {
               !open && "scale-0"
             }`}
           >
-            AdeCodes
+            Logo
           </h1>
         </div>
         <ul className="pt-6">
@@ -49,6 +49,7 @@ const Sidebar = () => {
               ${Menu.gap ? "mt-9" : "mt-2"} ${
                 index === 0 && "bg-light-white"
               } `}
+              onClick={() => router.push(Menu.url ? Menu.url : '/')}
             >
               <img src={`/assets/${Menu.src}.svg`} />
               <span className={`${!open && "hidden"} origin-left duration-200`}>
